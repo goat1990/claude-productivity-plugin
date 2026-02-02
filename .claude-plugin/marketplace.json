@@ -1,11 +1,17 @@
 {
   "name": "productivity-tools",
-  "owner": "goat1990",
+  "owner": {
+    "name": "goat1990",
+    "url": "https://github.com/goat1990"
+  },
   "description": "Plugin de productividad para Claude Code",
   "plugins": [
     {
       "name": "productivity",
-      "source": "https://github.com/goat1990/claude-productivity-plugin",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/goat1990/claude-productivity-plugin"
+      },
       "description": "Memoria persistente, tutor socratico, tech debt scanner y code review",
       "version": "1.0.0"
     }
