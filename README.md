@@ -1,8 +1,37 @@
 # Claude Productivity Plugin
 
-> Sistema de productividad para Claude Code: memoria persistente, aprendizaje socrático, quality gates y worktrees paralelos.
+> Plugin de productividad para Claude Code: memoria persistente, aprendizaje socratico, quality gates y worktrees paralelos.
 
 Basado en los tips del equipo de Anthropic para maximizar la productividad con Claude Code.
+
+## Instalacion
+
+### Opcion 1: Desde GitHub (recomendado)
+
+```bash
+# Clonar el plugin
+git clone https://github.com/goat1990/claude-productivity-plugin.git
+
+# Probar localmente
+claude --plugin-dir ./claude-productivity-plugin
+```
+
+### Opcion 2: Instalacion permanente
+
+```bash
+# Clonar a directorio de plugins
+git clone https://github.com/goat1990/claude-productivity-plugin.git ~/.claude/plugins/productivity
+
+# Agregar a settings.json
+# En ~/.claude/settings.json, agregar:
+# "plugins": ["~/.claude/plugins/productivity"]
+```
+
+### Opcion 3: Test rapido
+
+```bash
+claude --plugin-dir https://github.com/goat1990/claude-productivity-plugin
+```
 
 ## Features
 
@@ -10,122 +39,78 @@ Basado en los tips del equipo de Anthropic para maximizar la productividad con C
 
 Claude recuerda tus correcciones y preferencias entre sesiones.
 
-- **CLAUDE.md** - Reglas del proyecto que Claude lee automáticamente
-- **mistakes.md** - Errores corregidos que Claude NO repetirá
-- **patterns.md** - Patrones de código preferidos
+- **CLAUDE.md** - Reglas del proyecto que Claude lee automaticamente
+- **mistakes.md** - Errores corregidos que Claude NO repetira
+- **patterns.md** - Patrones de codigo preferidos
 - **notes/** - Notas por feature/tarea
 
-### 2. Skills Personalizados
+### 2. Skills Disponibles
 
-| Skill | Comando | Descripción |
+| Skill | Comando | Descripcion |
 |-------|---------|-------------|
-| Socratic Tutor | `/tutor` | Aprende con preguntas, no lecturas |
-| Tech Debt | `/techdebt` | Escanea deuda técnica y código duplicado |
-| Memory | `/memory` | Gestiona la memoria de Claude |
-| Review | `/review` | Code review profesional antes de commits |
+| Tutor | `/productivity:tutor` | Aprende con preguntas, no lecturas |
+| Tech Debt | `/productivity:techdebt` | Escanea deuda tecnica y codigo duplicado |
+| Memory | `/productivity:memory` | Gestiona la memoria de Claude |
+| Review | `/productivity:review` | Code review profesional antes de commits |
 
-### 3. Hooks Automáticos
+### 3. Comandos
 
-- **Tests automáticos** - Se ejecutan después de cada edición
-- **Linting** - Verifica estilo de código
+| Comando | Descripcion |
+|---------|-------------|
+| `/productivity:init` | Inicializa proyecto con memoria persistente |
+| `/productivity:worktrees` | Configura worktrees para trabajo paralelo |
+
+### 4. Hooks Automaticos
+
+- **Tests automaticos** - Se ejecutan despues de cada edicion
 - **Notificaciones** - Alerta cuando termina una tarea larga
-
-### 4. Worktrees Paralelos
-
-Trabaja en múltiples tareas simultáneamente con diferentes sesiones de Claude:
-
-```bash
-za  # → worktree de análisis
-zb  # → worktree de feature
-zc  # → worktree de hotfix
-zm  # → repo principal
-```
-
-## Instalación
-
-### Opción 1: Instalación Rápida
-
-```bash
-git clone https://github.com/goat1990/claude-productivity-plugin.git
-cd claude-productivity-plugin
-./scripts/install.sh
-```
-
-### Opción 2: Manual
-
-1. **Clonar el repositorio**
-```bash
-git clone https://github.com/goat1990/claude-productivity-plugin.git
-```
-
-2. **Copiar skills a Claude Code**
-```bash
-mkdir -p ~/.claude/skills
-cp skills/*.md ~/.claude/skills/
-```
-
-3. **Copiar hooks**
-```bash
-mkdir -p ~/.claude/hooks
-cp hooks/*.sh ~/.claude/hooks/
-chmod +x ~/.claude/hooks/*.sh
-```
-
-4. **Agregar aliases al shell** (opcional)
-```bash
-cat scripts/shell-aliases.sh >> ~/.zshrc
-source ~/.zshrc
-```
 
 ## Uso
 
 ### Inicializar un Proyecto
 
-```bash
-cd tu-proyecto
-/path/to/claude-productivity-plugin/scripts/init-project.sh
+```
+> /productivity:init Mi Proyecto
+
+Claude: "Proyecto inicializado con memoria persistente.
+- Creado CLAUDE.md
+- Creado .claude/mistakes.md
+- Creado .claude/patterns.md
+- Creado .claude/notes/
+
+Cuando me corrijas, guardare la leccion automaticamente."
 ```
 
-Esto crea:
-```
-tu-proyecto/
-├── CLAUDE.md              # Edita con tus reglas
-├── .claude/
-│   ├── mistakes.md        # Se llena automáticamente
-│   ├── patterns.md        # Tus patrones preferidos
-│   └── notes/             # Notas por tarea
-```
-
-### Enseñar a Claude
+### Ensenar a Claude
 
 Cuando Claude cometa un error:
 
 ```
-Tú: "No, usa imports específicos de lodash, no el default"
-Tú: "Guarda esto en tu memoria para no repetirlo"
+Tu: "No, usa imports especificos de lodash, no el default"
+Tu: "Guarda esto en tu memoria para no repetirlo"
 
 Claude: "Entendido. Guardando en .claude/mistakes.md..."
 ```
 
-Claude nunca repetirá ese error en este proyecto.
+Claude nunca repetira ese error en este proyecto.
 
 ### Modo Tutor
 
 ```
-> /tutor useEffect
+> /productivity:tutor useEffect
 
-Claude: "Antes de explicarte, ¿qué CREES que hace useEffect?"
-[Te guía con preguntas hasta que entiendas]
+Claude: "Antes de explicarte, que CREES que hace useEffect?"
+[Te guia con preguntas hasta que entiendas]
 ```
 
 ### Escanear Tech Debt
 
 ```
-> /techdebt
+> /productivity:techdebt
 
-Claude: "Encontré 15 issues:
+Claude: "Encontre 15 issues:
 - 3 TODOs sin resolver
-- 2 funciones con código duplicado
+- 2 funciones con codigo duplicado
 - 1 dependencia con vulnerabilidad
 ..."
 ```
@@ -133,73 +118,71 @@ Claude: "Encontré 15 issues:
 ### Code Review
 
 ```
-> /review
+> /productivity:review
 
 Claude: "Analizando cambios...
 
-🔴 Critical: Missing null check en users.ts:45
-🟡 Suggestion: Considera usar early return
-🟢 Nitpick: 'data' → 'userData' para claridad
+Critical: Missing null check en users.ts:45
+Suggestion: Considera usar early return
+Nitpick: 'data' -> 'userData' para claridad
 
 Verdict: Approve with suggestions"
 ```
 
 ### Worktrees Paralelos
 
-```bash
-# En tu proyecto principal
-./scripts/setup-worktrees.sh
+```
+> /productivity:worktrees
 
-# Ahora tienes 3 worktrees:
-# proyecto-analysis  →  za
-# proyecto-feature   →  zb
-# proyecto-hotfix    →  zc
+Claude configura 3 worktrees:
+# proyecto-analysis  ->  za
+# proyecto-feature   ->  zb
+# proyecto-hotfix    ->  zc
 
-# Terminal 1: Análisis
-za
-claude "Analiza los logs de error"
-
-# Terminal 2: Feature
-zb
-claude "Implementa la feature de auth"
-
-# Terminal 3: Hotfix urgente
-zc
-claude "Arregla el bug de login"
+# Ahora puedes tener 3 Claudes trabajando en paralelo
 ```
 
 ## Estructura del Plugin
 
 ```
 claude-productivity-plugin/
+├── .claude-plugin/
+│   └── plugin.json          # Manifest del plugin
 ├── skills/
-│   ├── tutor.md           # Modo aprendizaje socrático
-│   ├── techdebt.md        # Detector de deuda técnica
-│   ├── memory-update.md   # Sistema de memoria
-│   └── review.md          # Code review profesional
+│   ├── tutor/
+│   │   └── SKILL.md         # Modo aprendizaje socratico
+│   ├── techdebt/
+│   │   └── SKILL.md         # Detector de deuda tecnica
+│   ├── memory/
+│   │   └── SKILL.md         # Sistema de memoria
+│   └── review/
+│       └── SKILL.md         # Code review profesional
+├── commands/
+│   ├── init.md              # Inicializar proyecto
+│   └── worktrees.md         # Configurar worktrees
 ├── hooks/
-│   ├── hooks-config.json  # Configuración de hooks
-│   ├── post-edit-test.sh  # Tests automáticos
-│   ├── lint-check.sh      # Linting automático
-│   └── notify-complete.sh # Notificaciones
+│   ├── hooks.json           # Configuracion de hooks
+│   └── scripts/
+│       ├── post-edit-test.sh
+│       └── notify-complete.sh
 ├── templates/
-│   ├── CLAUDE.md.template # Template para proyectos
+│   ├── CLAUDE.md.template
 │   └── .claude/
-│       ├── mistakes.md    # Template de errores
-│       ├── patterns.md    # Template de patrones
-│       └── notes/         # Directorio de notas
+│       ├── mistakes.md
+│       ├── patterns.md
+│       └── notes/
 ├── scripts/
-│   ├── install.sh         # Instalación del plugin
-│   ├── init-project.sh    # Inicializar proyecto
-│   └── setup-worktrees.sh # Configurar worktrees
+│   ├── install.sh           # Instalacion legacy
+│   ├── init-project.sh
+│   └── setup-worktrees.sh
 └── README.md
 ```
 
 ## Tips Avanzados
 
-### 1. Múltiples Claudes en Paralelo
+### 1. Multiples Claudes en Paralelo
 
-Con worktrees, puedes tener 3-5 sesiones de Claude trabajando simultáneamente en diferentes aspectos del mismo proyecto sin conflictos de git.
+Con worktrees, puedes tener 3-5 sesiones de Claude trabajando simultaneamente en diferentes aspectos del mismo proyecto sin conflictos de git.
 
 ### 2. Plan Mode
 
@@ -215,13 +198,13 @@ Claude escribe el plan, luego un segundo Claude lo revisa como staff engineer.
 ```
 > Grill me on these changes
 
-Claude: "Te voy a hacer preguntas difíciles sobre tu código.
+Claude: "Te voy a hacer preguntas dificiles sobre tu codigo.
 No apruebo hasta que respondas bien."
 ```
 
 ### 4. Mantener CLAUDE.md Actualizado
 
-Después de cada corrección:
+Despues de cada correccion:
 ```
 "Actualiza CLAUDE.md para que no repitas este error"
 ```
@@ -232,66 +215,51 @@ Después de cada corrección:
 "Crea una nota en .claude/notes/feature-auth.md con el contexto de esta tarea"
 ```
 
-Útil para retomar trabajo después de días/semanas.
+Util para retomar trabajo despues de dias/semanas.
 
-## Configuración de Hooks
+## Desarrollo
 
-Edita `~/.claude/hooks/hooks-config.json` para personalizar:
+Para contribuir o modificar el plugin:
 
-```json
-{
-  "hooks": {
-    "PostToolUse": [
-      {
-        "name": "auto-test-on-edit",
-        "matcher": "Write|Edit",
-        "command": "./hooks/post-edit-test.sh",
-        "enabled": true
-      }
-    ]
-  },
-  "profiles": {
-    "development": { "auto-test-on-edit": true },
-    "fast": { "auto-test-on-edit": false }
-  }
-}
-```
-
-## Solución de Problemas
-
-### Skills no se reconocen
-
-Verifica que los archivos están en `~/.claude/skills/`:
 ```bash
-ls ~/.claude/skills/
+# Clonar
+git clone https://github.com/goat1990/claude-productivity-plugin.git
+cd claude-productivity-plugin
+
+# Probar cambios
+claude --plugin-dir .
+
+# Los cambios en skills/ y commands/ se reflejan inmediatamente
 ```
+
+## Solucion de Problemas
+
+### Plugin no se carga
+
+Verificar que existe `.claude-plugin/plugin.json`:
+```bash
+cat .claude-plugin/plugin.json
+```
+
+### Skills no aparecen
+
+Los skills deben tener la estructura:
+```
+skills/nombre/SKILL.md
+```
+Con frontmatter YAML valido.
 
 ### Hooks no se ejecutan
 
-1. Verifica permisos:
+Verificar permisos:
 ```bash
-chmod +x ~/.claude/hooks/*.sh
+chmod +x hooks/scripts/*.sh
 ```
-
-2. Verifica configuración en settings.json
-
-### Aliases no funcionan
-
-```bash
-source ~/.zshrc  # o ~/.bashrc
-```
-
-## Contribuir
-
-1. Fork el repositorio
-2. Crea una rama para tu feature
-3. Haz tus cambios
-4. Abre un PR
 
 ## Licencia
 
 MIT
 
-## Créditos
+## Creditos
 
 Basado en los tips del equipo de Claude Code de Anthropic y la comunidad.
