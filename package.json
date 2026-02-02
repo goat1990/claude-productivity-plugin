@@ -1,0 +1,35 @@
+{
+  "name": "claude-productivity-plugin",
+  "version": "1.0.0",
+  "description": "Plugin de productividad para Claude Code: memoria persistente, tutor socrático, quality gates y worktrees",
+  "author": "cubait",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "productivity",
+    "developer-tools",
+    "ai-assistant",
+    "workflow"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cubait/claude-productivity-plugin"
+  },
+  "scripts": {
+    "install": "./scripts/install.sh",
+    "setup-worktrees": "./scripts/setup-worktrees.sh",
+    "init-project": "./scripts/init-project.sh"
+  },
+  "claude-code": {
+    "skills": [
+      "skills/tutor.md",
+      "skills/techdebt.md",
+      "skills/memory-update.md",
+      "skills/review.md"
+    ],
+    "hooks": "hooks/hooks-config.json"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
