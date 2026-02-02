@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/cubait/claude-productivity-plugin"
+    "url": "https://github.com/goat1990/claude-productivity-plugin"
   },
   "scripts": {
     "install": "./scripts/install.sh",

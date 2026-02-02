@@ -46,7 +46,7 @@ zm  # → repo principal
 ### Opción 1: Instalación Rápida
 
 ```bash
-git clone https://github.com/cubait/claude-productivity-plugin.git
+git clone https://github.com/goat1990/claude-productivity-plugin.git
 cd claude-productivity-plugin
 ./scripts/install.sh
 ```
@@ -55,7 +55,7 @@ cd claude-productivity-plugin
 
 1. **Clonar el repositorio**
 ```bash
-git clone https://github.com/cubait/claude-productivity-plugin.git
+git clone https://github.com/goat1990/claude-productivity-plugin.git
 ```
 
 2. **Copiar skills a Claude Code**
