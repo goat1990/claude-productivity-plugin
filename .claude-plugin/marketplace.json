@@ -1,0 +1,12 @@
+{
+  "name": "Productivity Plugin Marketplace",
+  "description": "Plugin de productividad para Claude Code",
+  "plugins": [
+    {
+      "name": "productivity",
+      "source": ".",
+      "description": "Memoria persistente, tutor socratico, tech debt scanner y code review",
+      "version": "1.0.0"
+    }
+  ]
+}
