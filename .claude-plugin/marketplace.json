@@ -1,19 +1,23 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "productivity-tools",
+  "version": "1.0.0",
+  "description": "Plugin de productividad para Claude Code",
   "owner": {
     "name": "goat1990",
-    "url": "https://github.com/goat1990"
+    "email": "goat1990@users.noreply.github.com"
   },
-  "description": "Plugin de productividad para Claude Code",
   "plugins": [
     {
       "name": "productivity",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/goat1990/claude-productivity-plugin"
-      },
       "description": "Memoria persistente, tutor socratico, tech debt scanner y code review",
-      "version": "1.0.0"
+      "source": "./plugins/productivity",
+      "category": "productivity",
+      "version": "1.0.0",
+      "author": {
+        "name": "goat1990",
+        "email": "goat1990@users.noreply.github.com"
+      }
     }
   ]
 }

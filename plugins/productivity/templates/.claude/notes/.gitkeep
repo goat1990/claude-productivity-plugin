@@ -1,0 +1,19 @@
+# Notes Directory
+
+Este directorio almacena notas por feature/tarea.
+
+Claude puede crear archivos aquí automáticamente para mantener
+contexto entre sesiones sobre tareas específicas.
+
+Ejemplo de estructura:
+```
+notes/
+├── feature-auth.md      # Notas sobre implementación de auth
+├── bugfix-login.md      # Investigación de bug
+└── refactor-api.md      # Plan de refactoring
+```
+
+Para crear una nota:
+```
+"Crea una nota en .claude/notes/[nombre].md con el contexto de esta tarea"
+```

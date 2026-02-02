@@ -1,0 +1,61 @@
+# Project: {{PROJECT_NAME}}
+
+> Este archivo es tu memoria persistente. Claude lo lee al inicio de cada sesión.
+
+## Stack Tecnológico
+<!-- Descomenta y completa según tu proyecto -->
+<!--
+- Frontend: React/Next.js/Vue
+- Backend: Node/Python/Go
+- Database: PostgreSQL/MongoDB/Redis
+- Testing: Jest/Vitest/Pytest
+-->
+
+## Reglas de Código (OBLIGATORIAS)
+
+### Estilo
+- [ ] Usar TypeScript con tipos estrictos (no `any`)
+- [ ] Componentes funcionales con hooks
+- [ ] Imports específicos (no `import * as`)
+
+### Patrones Preferidos
+- [ ] Composición sobre herencia
+- [ ] Funciones puras cuando sea posible
+- [ ] Early returns para reducir anidación
+
+### Naming Conventions
+- Variables/funciones: `camelCase`
+- Componentes/Clases: `PascalCase`
+- Constantes: `UPPER_SNAKE_CASE`
+- Archivos: `kebab-case.ts`
+
+## NO HACER (Errores Aprendidos)
+
+> Cuando corrijas a Claude, pídele que agregue el error aquí con:
+> "Guarda esto en tu memoria para no repetirlo"
+
+<!-- Ejemplo:
+### Import de Lodash
+- ❌ NO: `import { debounce } from 'lodash'`
+- ✅ SÍ: `import debounce from 'lodash/debounce'`
+- Razón: Tree-shaking para bundle más pequeño
+-->
+
+## Contexto del Proyecto
+
+### Arquitectura
+<!-- Describe brevemente la estructura de tu proyecto -->
+
+### Decisiones Importantes
+<!-- Documenta decisiones de arquitectura y sus razones -->
+
+## Archivos de Memoria Adicionales
+
+- `.claude/mistakes.md` - Historial detallado de errores corregidos
+- `.claude/patterns.md` - Patrones específicos de este proyecto
+- `.claude/notes/` - Notas por feature/tarea
+
+---
+
+> Actualizado: {{DATE}}
+> Para regenerar este template: `npx claude-productivity init`
